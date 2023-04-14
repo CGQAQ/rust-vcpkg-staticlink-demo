@@ -1,6 +1,16 @@
 use std::{path::PathBuf, env};
+use std::process::Command;
 
 fn main() {
+    Command::new("cargo")
+        .args(&["install", "cargo-vcpkg"])
+        .status()
+        .expect("Failed to install cargo-vcpkg");
+    Command::new("cargo")
+        .args(&["vcpkg", "build"])
+        .status()
+        .expect("Failed to build vcpkg and dependencies, please run `cargo clean` and try again");
+
     #[cfg(windows)]
     println!("cargo:rustc-env=RUSTFLAGS=-Ctarget-feature=+crt-static");
     // println!("cargo:env=OPENSSL_STATIC");

@@ -16,9 +16,10 @@ cc = "1.0"
 [package.metadata.vcpkg]
 git = "https://github.com/microsoft/vcpkg"
 rev = "809266d"
+dependencies = ["openssl"]
 
 [package.metadata.vcpkg.target]
 x86_64-pc-windows-msvc = { dependencies = ["openssl:x64-windows-static-md"] }
 x86_64-unknown-linux-gnu = { dependencies = ["openssl:x64-linux"] }
 x86_64-apple-darwin = { dependencies = ["openssl:x64-osx"] }
-
+aarch64-apple-darwin = { dependencies = ["openssl:arm64-osx"] }
