@@ -1,7 +1,12 @@
-# static linking anything with Rust
+# static linking anything with Rust and vcpkg
 
+On windows
 ```console
-cargo install cargo-vcpkg
-cargo vcpkg build
-cargo add --build vcpkg
+run.bat
+```
+
+On unix-like OS
+```console
+chmod +x ./run.sh
+./run.sh
 ```

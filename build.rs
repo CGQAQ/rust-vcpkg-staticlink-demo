@@ -1,7 +1,7 @@
 fn main() {
     #[cfg(windows)]
     println!("cargo:rustc-env=RUSTFLAGS=-Ctarget-feature=+crt-static");
-    println!("cargo:env=OPENSSL_STATIC");
+    // println!("cargo:env=OPENSSL_STATIC");
     let lib_openssl = vcpkg::Config::new()
         .emit_includes(true)
         .find_package("openssl")
