@@ -1,0 +1,18 @@
+[package]
+name = "staticlink-openssl"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# openssl = "0.10.50"
+
+[build-dependencies]
+vcpkg = "0.2.15"
+cc = "1.0"
+
+[package.metadata.vcpkg]
+git = "https://github.com/microsoft/vcpkg"
+rev = "809266d"
+dependencies = ["openssl:x64-windows-static-md"]
