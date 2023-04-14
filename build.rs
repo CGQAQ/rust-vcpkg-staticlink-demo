@@ -1,3 +1,5 @@
+use std::{path::PathBuf, env};
+
 fn main() {
     #[cfg(windows)]
     println!("cargo:rustc-env=RUSTFLAGS=-Ctarget-feature=+crt-static");
@@ -6,6 +8,17 @@ fn main() {
         .emit_includes(true)
         .find_package("openssl")
         .unwrap();
+
+    let bindings = bindgen::Builder::default()
+        .header("src/bindings.h")
+        .prepend_enum_name(false)
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks)); // Tell cargo to invalidate the built crate whenever any of the included header files changed.
+    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+    bindings
+        .generate()
+        .expect("Unable to generate bindings")
+        .write_to_file(out_path.join("bindings.rs"))
+        .expect("Couldn't write bindings!");
 
     println!("cargo:rerun-if-changed=src/bindings.c");
     cc::Build::new()
